@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthCuentaGuard } from './auth/GuardCuenta/auth-cuenta.guard';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path:'login',component:LoginComponent},
+  {path:'Account/login',component:LoginComponent,canActivate:[AuthCuentaGuard]},
   {path:'',loadChildren:()=>import('./auth/auth.module').then(m=>m.AuthModule)},
   {path:'**',component:ErrorPageComponent}
 ];
