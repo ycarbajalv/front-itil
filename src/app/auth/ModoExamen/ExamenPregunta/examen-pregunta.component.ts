@@ -206,9 +206,7 @@ EnviarRespuesta(i:number){
       }
       else{
         TiempoSegundoReversa=TiempoSegundoReversa-1;
-      console.log(TiempoSegundoReversa)
         this.MinutoReversa = Math.floor(TiempoSegundoReversa / 60);
-        console.log(this.MinutoReversa)
         this.MinutoMostrarReversa = (this.MinutoReversa < 10) ? '0' + this.MinutoReversa : this.MinutoReversa.toString();
 
         setTimeout(()=>{

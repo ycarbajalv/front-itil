@@ -88,9 +88,7 @@
                 <ng-container *ngIf="Respuesta.respuestaSelecionada!=1">check_box_outline_blank</ng-container>
                 </i>
                 </div>
-                <div *ngIf="Respuesta.valor==1" [innerHTML]="Respuesta.respuesta | safeHtml" style="color: red;">
-                </div>
-                <div *ngIf="Respuesta.valor==0" [innerHTML]="Respuesta.respuesta| safeHtml">
+                <div [innerHTML]="Respuesta.respuesta| safeHtml">
                 </div>
               </div>
             </ng-container>

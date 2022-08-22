@@ -119,7 +119,6 @@ export class HomeComponent implements OnInit {
     this._ExamenService.ObtenerMejorExamenPorUsuario(this.MejorExamenEnvio).subscribe({
       next:(x)=>{
         if(x!=null){
-          console.log(x)
           this.DominioResultado=x.dominioResultado;
         this.ResultadoDominio1=Math.floor(x.dominioResultado[0].desempenio);
         this.ResultadoDominio2=Math.floor(x.dominioResultado[1].desempenio);

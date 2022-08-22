@@ -275,7 +275,6 @@ export class ModoExamenComponent implements OnInit {
     this._ExamenService.ObtenerPromedioDominioPorModo(3).subscribe({
       next:(x)=>{
         this.ResultadosPorDominio=x
-        console.log(this.ResultadosPorDominio)
       }
     })
   }
