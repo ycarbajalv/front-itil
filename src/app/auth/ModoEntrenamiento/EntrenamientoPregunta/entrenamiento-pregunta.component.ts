@@ -173,7 +173,7 @@ EnviarRespuesta(i:number){
 }
  SalirRetroalimentacion(){
   this.PausarContador=true;
-    this._router.navigate(['/ModoExamen']);
+    this._router.navigate(['/ModoEntrenamiento']);
     this.ContadorPregunta=this.ContadorPregunta+1;
   }
   SiguientePregunta(){
