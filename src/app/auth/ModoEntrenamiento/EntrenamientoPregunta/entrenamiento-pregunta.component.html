@@ -81,13 +81,13 @@
               <div id="Alternativas">
                 <ng-container *ngFor="let Respuesta of Preguntas.pregunta.respuesta; let j=index">
                   <div style="display: flex;align-items: flex-start;font-size: 15px;color: black;text-align: justify;margin-bottom: 10px;">
-                    <div (click)="Respuesta.respuestaSelecionada=chageRadio(Respuesta.respuestaSelecionada,i,j)">
+                    <div (click)="Respuesta.respuestaSelecionada=chageRadio(Respuesta.respuestaSelecionada,i,j)" (click)="VerificarMarcado(i)">
                     <i class="material-icons radioFormRpta" [style]="{'color':Respuesta.respuestaSelecionada==1?'green':'#ededed'}">
                     <ng-container *ngIf="Respuesta.respuestaSelecionada==1">check_box</ng-container>
                     <ng-container *ngIf="Respuesta.respuestaSelecionada!=1">check_box_outline_blank</ng-container>
                     </i>
                     </div>
-                    <div [innerHTML]="Respuesta.respuesta| safeHtml">
+                    <div [innerHTML]="Respuesta.respuesta| safeHtml" >
                     </div>
                   </div>
                 </ng-container>

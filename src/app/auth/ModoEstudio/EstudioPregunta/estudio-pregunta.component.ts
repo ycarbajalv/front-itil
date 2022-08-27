@@ -105,22 +105,32 @@ export class EstudioPreguntaComponent implements OnInit {
     })
   }
   chageRadio(value: number,i: number, j: number) {
-    this.RespuestaMarcada=false;
-      if (value == 0 && this.ListaPreguntas[i].pregunta.respuesta[j] && this.ListaPreguntas[i].pregunta.idSimuladorTipoRespuesta==1) {
-        this.ListaPreguntas[i].pregunta.respuesta.forEach((x:any)=>{
-          x.respuestaSelecionada=0
-        })
-        this.RespuestaMarcada=true;
-        return 1;
-      }
-      if (value == 0 && this.ListaPreguntas[i].pregunta.respuesta[j] && this.ListaPreguntas[i].pregunta.idSimuladorTipoRespuesta==5) {
-        this.RespuestaMarcada=true
-        return 1;
-      }
-      this.RespuestaMarcada=false;
+    if (value == 0 && this.ListaPreguntas[i].pregunta.respuesta[j] && this.ListaPreguntas[i].pregunta.idSimuladorTipoRespuesta==1) {
+      this.ListaPreguntas[i].pregunta.respuesta.forEach((x:any)=>{
+        x.respuestaSelecionada=0
+      })
+      return 1;
+    }
+    if (value == 1 && this.ListaPreguntas[i].pregunta.respuesta[j] && this.ListaPreguntas[i].pregunta.idSimuladorTipoRespuesta==1) {
+      return 0;
+    }
+    if (value == 0 && this.ListaPreguntas[i].pregunta.respuesta[j] && this.ListaPreguntas[i].pregunta.idSimuladorTipoRespuesta==5) {
+      return 1;
+    }
+    if (value == 1 && this.ListaPreguntas[i].pregunta.respuesta[j] && this.ListaPreguntas[i].pregunta.idSimuladorTipoRespuesta==5) {
       return 0;
 
-  }
+    }
+    else return 0;
+}
+VerificarMarcado(i:number){
+  this.RespuestaMarcada=false
+  this.ListaPreguntas[i].pregunta.respuesta.forEach((x:any)=>{
+    if( x.respuestaSelecionada==1){
+      this.RespuestaMarcada=true
+    }
+  })
+}
   RegresarMenu(i:number){
     this.Retroalimentacion=false;
     this.PausarContador=true;
@@ -141,23 +151,24 @@ export class EstudioPreguntaComponent implements OnInit {
     this.RegistroEnvioRespuesta.idSimuladorTipoRespuesta=this.ListaPreguntas[i].pregunta.idSimuladorTipoRespuesta,
     this.ListaPreguntas[i].pregunta.respuesta.forEach((x:any)=>{
       if(x.respuestaSelecionada==1){
-        this.DetalleRespuestaEnvio.idSimuladorAdsaPreguntaRespuesta=x.id;
-        this.DetalleRespuestaEnvio.id=this.ListaPreguntas[i].id;
-        this.DetalleRespuestaEnvio.idSimuladorAdsaExamen=0;
-        this.DetalleRespuestaEnvio.idSimuladorAdsaDominio=0;
-        this.DetalleRespuestaEnvio.idSimuladorAdsaTarea=0;
-        this.DetalleRespuestaEnvio.idSimuladorAdsaPregunta=this.ListaPreguntas[i].idSimuladorAdsaPregunta;
-        this.DetalleRespuestaEnvio.ejecutado=false;
-        this.DetalleRespuestaEnvio.puntaje=0;
-        this.DetalleRespuestaEnvio.idAspNetUsers='';
-        this.DetalleRespuestaEnvio.usuario=''
         if(this.ContadorPreguntaActual<=this.ContadorAux){
           this.RegistroEnvioRespuesta.estadoExamen=2
         }
         else{
           this.RegistroEnvioRespuesta.estadoExamen=3
         }
-        this.RegistroEnvioRespuesta.respuestaDetalle.push(this.DetalleRespuestaEnvio)
+        this.RegistroEnvioRespuesta.respuestaDetalle.push({
+          idSimuladorAdsaPreguntaRespuesta:x.id,
+          id:this.ListaPreguntas[i].id,
+          idSimuladorAdsaExamen:0,
+          idSimuladorAdsaDominio:0,
+          idSimuladorAdsaTarea:0,
+          idSimuladorAdsaPregunta:this.ListaPreguntas[i].idSimuladorAdsaPregunta,
+          ejecutado:false,
+          puntaje:0,
+          idAspNetUsers:'',
+          usuario:''
+        })
       }
 
     })
