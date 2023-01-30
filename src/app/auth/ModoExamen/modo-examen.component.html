@@ -67,61 +67,24 @@
         </div>
       </div>
     </div>
-    <div *ngIf="ResultadosPorDominio!=undefined" class="titulo" style="font-weight: 400 !important;margin-bottom: 10px;">
-      <div class="row">
+    <div *ngIf="ResultadosPorDominio!=undefined">
+      <div class="row titulo" style="font-weight: 400 !important;margin-bottom: 10px;">
+      <ng-container *ngFor="let itemDominios of ResultadosPorDominio" >
         <div class="col-12 col-md-3">
           <div style="display: flex;justify-content: center;">
-        <app-dona-puntos [Puntos]="ResultadosPorDominio.dominio1"></app-dona-puntos>
+            <app-dona-puntos [Puntos]="itemDominios.promedio"></app-dona-puntos>
+          </div>
+        <div class="item-leyenda-dona">
+          <div class="subtitulo">
+            Habilidad {{itemDominios.id}}:
+          </div>
+          <div style="font-size: 14px">
+            {{itemDominios.nombre}}
+          </div>
+          </div>
+          </div>
+      </ng-container>
       </div>
-      <div class="item-leyenda-dona">
-        <div class="subtitulo">
-          Habilidad 1:
-        </div>
-        <div style="font-size: 14px">
-          Administrar los recursos de Azure para el aprendizaje automático.
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-3">
-      <div style="display: flex;justify-content: center;">
-        <app-dona-puntos [Puntos]="ResultadosPorDominio.dominio2"></app-dona-puntos>
-      </div>
-      <div class="item-leyenda-dona">
-        <div class="subtitulo">
-          Habilidad 2:
-        </div>
-        <div style="font-size: 14px">
-          Ejecutar experimentos y entrenar modelos.
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-3">
-      <div style="display: flex;justify-content: center;">
-        <app-dona-puntos [Puntos]="ResultadosPorDominio.dominio3"></app-dona-puntos>
-      </div>
-      <div class="item-leyenda-dona">
-        <div class="subtitulo">
-          Habilidad 3:
-        </div>
-        <div style="font-size: 14px">
-          Implementar y poner en funcionamiento soluciones de aprendizaje automático.
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-3">
-      <div style="display: flex;justify-content: center;">
-        <app-dona-puntos [Puntos]="ResultadosPorDominio.dominio4"></app-dona-puntos>
-      </div>
-      <div class="item-leyenda-dona">
-        <div class="subtitulo">
-          Habilidad 4:
-        </div>
-        <div style="font-size: 14px">
-          Implementar aprendizaje automático responsable.
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 <div style="padding-top: 20px; padding-bottom: 20px; border-top: 1px solid #cececf ">
   <div class="row">
