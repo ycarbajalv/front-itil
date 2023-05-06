@@ -53,19 +53,19 @@
   <br>
   <div style="font-weight: 400 !important;margin-bottom: 40px;">
     <div class="titulo" style="margin-bottom: 15px">
-    Mejor puntaje por habilidades
+      Resultado del aprendizaje con mayor rendimiento
     </div>
   </div>
-  <div *ngIf="ResultadosPorDominio!=undefined">
+  <div *ngIf="ResultadosPorTarea!=undefined">
     <div class="row titulo" style="font-weight: 400 !important;margin-bottom: 10px;">
-    <ng-container *ngFor="let itemDominios of ResultadosPorDominio" >
+    <ng-container *ngFor="let itemDominios of ResultadosPorTarea" >
       <div class="col-12 col-md-3">
         <div style="display: flex;justify-content: center;">
           <app-dona-puntos [Puntos]="itemDominios.promedio"></app-dona-puntos>
         </div>
       <div class="item-leyenda-dona">
         <div class="subtitulo">
-          Habilidad {{itemDominios.id}}:
+          Objetivo de aprendizaje {{itemDominios.id}}:
         </div>
         <div style="font-size: 14px">
           {{itemDominios.nombre}}
@@ -89,71 +89,111 @@
         Instrucciones:
       </div>
       <div>
-        En este modo podrás estudiar de forma individual cada una de las habilidades que componen el examen, en todas las preguntas se te brindará retroalimentación para verificar tus respuestas y fortalecer tus conocimientos
+        En este modo podrás estudiar de forma personalizada cada uno de los resultado del aprendizaje en los que se divide en examen, además en todas las preguntas se te brindará retroalimentación para verificar tus respuestas y fortalecer tus conocimientos.
       </div>
       <form (submit)="RegistrarExamen()" [formGroup]="userForm">
         <div class="form-horizontal" id="form-crearExamen">
           <div class="row">
             <div class="col-md-12" style="padding-bottom: 20px;">
               <div class="subtitulo" style="margin-top: 20px;margin-bottom: 3px;">
-                Selecciona la habilidad que deseas estudiar:
+                Seleccione el resultado del aprendizaje que desea estudiar:
               </div>
               <div class="row">
-                <div *ngIf="DominioSeleccionado!=1" class="col-12 col-md-6 CardsDominio" (click)="DominioSeleccionado=1">
+                <div *ngIf="TareaSeleccionado!=1" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=1">
                   <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: #0C9AFE ;width:103%" >
                     <div class="col-md-2" style="display: flex; justify-content: center;">
-                      <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento1.svg">
+                      <img style="height: 50px;" src="https://repositorioweb.blob.core.windows.net/repositorioweb/simulador/itil/imagenes/OA1.svg">
                     </div>
                     <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;" >
-                      Administrar los recursos de Azure para el aprendizaje automático.
+                      Entender como los principios Guías de ITIL puede ayudar a una organización
                     </div>
                   </div>
                 </div>
-                <div *ngIf="DominioSeleccionado==1" class="col-12 col-md-6 CardsDominio" (click)="DominioSeleccionado=0">
+                <div *ngIf="TareaSeleccionado==1" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=0">
                   <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: rgb(255, 138, 92) ;width:103%" >
                     <div class="col-md-2" style="display: flex; justify-content: center;">
                       <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento1.svg">
                     </div>
                     <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;" >
-                      Administrar los recursos de Azure para el aprendizaje automático.
+                      Entender como los principios Guías de ITIL puede ayudar a una organización
                     </div>
                   </div>
                 </div>
 
-                <div *ngIf="DominioSeleccionado!=3" class="col-12 col-md-6 CardsDominio" (click)="DominioSeleccionado=3">
+                <div *ngIf="TareaSeleccionado!=3" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=3">
                   <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: #0C9AFE ;width:103%">
                     <div class="col-md-2" style="display: flex; justify-content: center;">
                       <img  style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento3.svg">
                     </div>
                     <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
-                      Implementar y poner en funcionamiento soluciones de aprendizaje automático.
+                        Entender las 4 dimensiones de la Gestión del servicio
                     </div>
                   </div>
                 </div>
-                <div *ngIf="DominioSeleccionado==3" class="col-12 col-md-6 CardsDominio" (click)="DominioSeleccionado=0">
+                <div *ngIf="TareaSeleccionado==3" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=0">
                   <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: rgb(255, 138, 92) ;width:103%">
                     <div class="col-md-2" style="display: flex; justify-content: center;">
                       <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento3.svg">
                     </div>
                     <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
-                      Implementar y poner en funcionamiento soluciones de aprendizaje automático.
+                        Entender las 4 dimensiones de la Gestión del servicio
                     </div>
                   </div>
                 </div>
-              </div>
+
+                <div *ngIf="TareaSeleccionado!=5" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=5">
+                  <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: #0C9AFE ;width:103%">
+                    <div class="col-md-2" style="display: flex; justify-content: center;">
+                      <img  style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento3.svg">
+                    </div>
+                    <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
+                      Entender las actividades de la Cadena de Valor del Servicio (SVC) y como se interconectan                    </div>
+                    </div>
+                </div>
+                
+                <div *ngIf="TareaSeleccionado==5" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=0">
+                  <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: rgb(255, 138, 92) ;width:103%">
+                    <div class="col-md-2" style="display: flex; justify-content: center;">
+                      <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento3.svg">
+                    </div>
+                    <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
+                      Entender las actividades de la Cadena de Valor del Servicio (SVC) y como se interconectan                    </div>
+                    </div>
+                </div>
+
+                <div *ngIf="TareaSeleccionado!=7" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=7">
+                  <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: #0C9AFE ;width:103%">
+                    <div class="col-md-2" style="display: flex; justify-content: center;">
+                      <img  style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento3.svg">
+                    </div>
+                    <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
+                      Entender las 7 prácticas de ITIL                  
+                    </div>
+                </div>
+               </div>
+                <div *ngIf="TareaSeleccionado==7" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=0">
+                  <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: rgb(255, 138, 92) ;width:103%">
+                    <div class="col-md-2" style="display: flex; justify-content: center;">
+                      <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento3.svg">
+                    </div>
+                    <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
+                      Entender las 7 prácticas de ITIL                    </div>
+                </div>
+
+                </div>
+              
 
               <div class="row">
-                <div *ngIf="DominioSeleccionado!=2" class="col-12 col-md-6 CardsDominio" (click)="DominioSeleccionado=2">
+                <div *ngIf="TareaSeleccionado!=2" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=2">
                   <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: #0C9AFE ;width:103%">
                     <div class="col-md-2" style="display: flex; justify-content: center;">
                       <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento2.svg">
                     </div>
                     <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
-                      Ejecutar experimentos y entrenar modelos.
-                    </div>
+                      Entender como los principios Guías de ITIL puede ayudar a una organización                    </div>
                   </div>
                 </div>
-                <div *ngIf="DominioSeleccionado==2" class="col-12 col-md-6 CardsDominio" (click)="DominioSeleccionado=0">
+                <div *ngIf="TareaSeleccionado==2" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=0">
                   <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: rgb(255, 138, 92) ;width:103%">
                     <div class="col-md-2" style="display: flex; justify-content: center;">
                       <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento2.svg">
@@ -164,30 +204,46 @@
                   </div>
                 </div>
 
-                <div *ngIf="DominioSeleccionado!=4" class="col-12 col-md-6 CardsDominio" (click)="DominioSeleccionado=4">
+                <div *ngIf="TareaSeleccionado!=4" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=4">
                   <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: #0C9AFE ;width:103%">
                     <div class="col-md-2" style="display: flex; justify-content: center;">
                       <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento4.svg">
                     </div>
                     <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
-                      Implementar aprendizaje automático responsable.
-                    </div>
+                      Entender el propósito y componentes del Sistema de Valor de Servicio de ITIL                    </div>
                   </div>
                 </div>
-                <div *ngIf="DominioSeleccionado==4" class="col-12 col-md-6 CardsDominio" (click)="DominioSeleccionado=0">
+                <div *ngIf="TareaSeleccionado==4" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=0">
                   <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: rgb(255, 138, 92) ;width:103%">
                     <div class="col-md-2" style="display: flex; justify-content: center;">
                       <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento4.svg">
                     </div>
                     <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
-                      Implementar aprendizaje automático responsable.
+                      Entender el propósito y componentes del Sistema de Valor de Servicio de ITIL                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="TareaSeleccionado!=6" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=6">
+                  <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: #0C9AFE ;width:103%">
+                    <div class="col-md-2" style="display: flex; justify-content: center;">
+                      <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento4.svg">
                     </div>
+                    <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
+                      Conocer el propósito y términos claves de 18 prácticas de ITIL  </div>                </div>
+                </div>
+                <div *ngIf="TareaSeleccionado==6" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=0">
+                  <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: rgb(255, 138, 92) ;width:103%">
+                    <div class="col-md-2" style="display: flex; justify-content: center;">
+                      <img style="height: 50px;" src="../../../assets/iconos/MC-ADSA-Tento4.svg">
+                    </div>
+                    <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;">
+                      Conocer el propósito y términos claves de 18 prácticas de ITIL                   </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <mat-error *ngIf="!userForm.invalid && DominioSeleccionado==0">Debe seleccionar una habilidad para la simulación</mat-error>
+          <mat-error *ngIf="!userForm.invalid && TareaSeleccionado==0">Debe seleccionar una habilidad para la simulación</mat-error>
           <div class="row">
             <div class="col-md-12" style="margin-top: 10px ">
               <div class="subtitulo">Nombre de la simulación:</div>
@@ -197,7 +253,8 @@
               </mat-form-field>
               </div>
             </div>
-          </div>
+        </div>
+        </div>
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
@@ -208,7 +265,7 @@
 
           </div>
         </form>
-
+        
       </div>
     </div>
     <br>
@@ -222,7 +279,7 @@
         <div *ngIf="ContSimulacionesCompletadas!=0">
           <div class="card-body" style="border-radius: 0px 0px 20px 20px;padding:0px;">
             <ng-container *ngFor="let item of SimulacionesCompletadas">
-              <div  *ngIf="item.idSimuladorAdsaModo==1" style="border-bottom: 1px solid #E4E4E4;padding-bottom: 15px;">
+              <div  *ngIf="item.idSimuladorItilModo==1" style="border-bottom: 1px solid #E4E4E4;padding-bottom: 15px;">
                 <div class="row texto-contenido" style="margin-top: 20px;margin-left: 0px;">
                   <div class="col-md-4">
                     <div style="padding-top: 10px; padding-bottom: 10px;">
@@ -278,7 +335,7 @@
         <div *ngIf="ContSimulacionesIncompletas!=0">
           <div class="card-body" style="border-radius: 0px 0px 20px 20px;padding:0px; ">
             <ng-container *ngFor="let item of SimulacionesIncompletas">
-              <div  *ngIf="item.idSimuladorAdsaModo==1" class="container" style="border-bottom: 1px solid #E4E4E4;padding: 0px;">
+              <div  *ngIf="item.idSimuladorItilModo==1" class="container" style="border-bottom: 1px solid #E4E4E4;padding: 0px;">
                 <div class="row texto-contenido" style="margin-top: 20px;margin-left: 0px;margin-bottom: 15px;">
                   <div class="col-md-6">
                     <div>

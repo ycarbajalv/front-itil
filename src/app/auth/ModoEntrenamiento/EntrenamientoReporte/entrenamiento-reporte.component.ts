@@ -15,7 +15,7 @@ export class EntrenamientoReporteComponent implements OnInit {
   ) { }
   public migaPan = [
     {
-      titulo: 'Simulador ADSA',
+      titulo: 'ITIL-F',
       urlWeb: '/',
     },
     {
@@ -47,7 +47,9 @@ export class EntrenamientoReporteComponent implements OnInit {
   ObtenerExamenReporteResultadosPorId(){
     this._ExamenService.ObtenerExamenReporteResultadosPorId(this.IdExamen).subscribe({
       next:(x)=>{
-        this.EntrenamientoResultado=x.dominioResultado;
+        // this.EntrenamientoResultado=x.dominioResultado;
+        this.EntrenamientoResultado=x.tareaResultado;
+        console.log(x.tareaResultado);
         this.Examen=x.examen;
         this.NombreExamen=x.examen.nombreExamen;
         this.TiempoTotalEstudio=x.examen.tiempo;

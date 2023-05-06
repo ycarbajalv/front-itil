@@ -1,8 +1,8 @@
-import { RegistroAdsaExamenDetalleDTO } from "./ExamenDetalleDTO";
+import { RegistroItilExamenDetalleDTO } from "./ExamenDetalleDTO";
 
-export interface RegistroAdsaExamenDTO{
+export interface RegistroItilExamenDTO{
   id:number,
-  idSimuladorAdsaModo:number,
+  idSimuladorItilModo:number,
   nombreExamen:string,
   tiempo:number,
   idAspNetUsers?:string,
@@ -11,12 +11,12 @@ export interface RegistroAdsaExamenDTO{
   puntaje?:number,
   desempenio?:number,
   percentil?:number,
-  idSimuladorAdsaTarea?:number,
-  idSimuladorAdsaDominio:number
+  idSimuladorItilTarea?:number,
+  idSimuladorItilDominio:number
 }
-export interface RegistroAdsaExamenRespuestaDTO{
+export interface RegistroItilExamenRespuestaDTO{
   id:number,
-  idSimuladorAdsaModo:number,
+  idSimuladorItilModo:number,
   nombreExamen:string,
   tiempo:number,
   idAspNetUsers?:string,
@@ -25,7 +25,7 @@ export interface RegistroAdsaExamenRespuestaDTO{
   puntaje?:number,
   desempenio?:number,
   percentil?:number,
-  respuestaDetalle: Array<RegistroAdsaExamenDetalleDTO>,
+  respuestaDetalle: Array<RegistroItilExamenDetalleDTO>,
   idSimuladorTipoRespuesta:number
 }
 export interface ExamenIntentoDTO{

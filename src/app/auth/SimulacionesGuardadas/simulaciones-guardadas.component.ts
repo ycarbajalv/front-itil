@@ -15,7 +15,7 @@ export class SimulacionesGuardadasComponent implements OnInit {
   ) { }
   public migaPan = [
     {
-      titulo: 'Simulador ADSA',
+      titulo: 'Simulador ITIL-F',
       urlWeb: '/',
     },
     {
@@ -39,10 +39,10 @@ export class SimulacionesGuardadasComponent implements OnInit {
         this.SimulacionesIncompletas=x
         if(x!=undefined){
           this.SimulacionesIncompletas.forEach((y:any)=>{
-            if(y.idSimuladorAdsaModo==1){
+            if(y.idSimuladorItilModo==1){
               this.ContEstudioIncompleto=this.ContEstudioIncompleto+1
             }
-            else if(y.idSimuladorAdsaModo==2){
+            else if(y.idSimuladorItilModo==2){
               this.ContEntrenamientoIncompleto=this.ContEntrenamientoIncompleto+1
             }
             else{

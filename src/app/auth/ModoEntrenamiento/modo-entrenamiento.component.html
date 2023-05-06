@@ -78,7 +78,7 @@
           </div>
         <div class="item-leyenda-dona">
           <div class="subtitulo">
-            Habilidad {{itemDominios.id}}:
+            Objetivo de aprendizaje {{itemDominios.id}}:
           </div>
           <div style="font-size: 14px">
             {{itemDominios.nombre}}
@@ -105,7 +105,7 @@
         Instrucciones:
       </div>
       <div>
-        En este modo se te presentará 60 preguntas, con la estructura del examen Microsoft Certified: Azure Data Scientist Associate DP-100. Se te mostrará la retroalimentación de cada pregunta luego de responderla, para que así puedas validar tu selección y fortalecer tus conocimientos.
+        En este modo se te presentará 40 preguntas con la estructura del examen Itil. Se te mostrará la retroalimentación de cada pregunta luego de responderla para así puedas validar tu selección y fortalecer tus conocimientos.
       </div>
       <form (submit)="RegistrarExamen()" [formGroup]="userForm">
         <div class="form-horizontal" id="form-crearExamen">
@@ -137,7 +137,7 @@
         <div *ngIf="ContSimulacionesCompletadas!=0">
           <div class="card-body" style="border-radius: 0px 0px 20px 20px;padding: 0px;">
             <ng-container *ngFor="let item of SimulacionesCompletadas">
-              <div  *ngIf="item.idSimuladorAdsaModo==2" style="border-bottom: 1px solid #E4E4E4;padding-bottom: 15px;">
+              <div  *ngIf="item.idSimuladorItilModo==2" style="border-bottom: 1px solid #E4E4E4;padding-bottom: 15px;">
                 <div class="row texto-contenido" style="margin-top: 20px;margin-left: 0px;">
                   <div class="col-md-4">
                     <div style="padding-top: 10px; padding-bottom: 10px;">
@@ -192,7 +192,7 @@
         <div *ngIf="ContSimulacionesIncompletas!=0">
           <div class="card-body" style="border-radius: 0px 0px 20px 20px;padding-top:0px;padding-bottom:0px; ">
             <ng-container *ngFor="let item of SimulacionesIncompletas">
-              <div  *ngIf="item.idSimuladorAdsaModo==2" class="container" style="border-bottom: 1px solid #E4E4E4;padding-bottom: 15px;">
+              <div  *ngIf="item.idSimuladorItilModo==2" class="container" style="border-bottom: 1px solid #E4E4E4;padding-bottom: 15px;">
                 <div class="row texto-contenido" style="margin-top: 20px;margin-left: 0px;">
                   <div class="col-md-6">
                     <div>

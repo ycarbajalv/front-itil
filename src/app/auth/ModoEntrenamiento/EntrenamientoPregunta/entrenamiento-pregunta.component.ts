@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RegistroAdsaExamenDetalleDTO } from 'src/app/Models/ExamenDetalleDTO';
-import { RegistroAdsaExamenRespuestaDTO } from 'src/app/Models/ExamenDTO';
+import { RegistroItilExamenDetalleDTO } from 'src/app/Models/ExamenDetalleDTO';
+import { RegistroItilExamenRespuestaDTO } from 'src/app/Models/ExamenDTO';
 import { ExamenService } from 'src/app/shared/Services/Examen/examen.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class EntrenamientoPreguntaComponent implements OnInit {
   ) { }
   public migaPan = [
     {
-      titulo: 'Simulador ADSA',
+      titulo: 'Simulador ITIL-F',
       urlWeb: '/',
     },
     {
@@ -31,6 +31,7 @@ export class EntrenamientoPreguntaComponent implements OnInit {
   public DatosExamen:any;
   public ListaPreguntas:any;
   public NombreDominio='';
+  public NombreTarea='';
   public CantidadTotalPreguntas=0;
   public ContadorPreguntaActual=0;
   public ContadorPregunta=0;
@@ -43,9 +44,9 @@ export class EntrenamientoPreguntaComponent implements OnInit {
   public HoraMostrar='';
   public MinutoMostrar='';
   public SegundoMostrar='';
-  public RegistroEnvioRespuesta:RegistroAdsaExamenRespuestaDTO={
+  public RegistroEnvioRespuesta:RegistroItilExamenRespuestaDTO={
     id:0,
-    idSimuladorAdsaModo:0,
+    idSimuladorItilModo:0,
     nombreExamen:'',
     tiempo:0,
     idAspNetUsers:'',
@@ -57,14 +58,14 @@ export class EntrenamientoPreguntaComponent implements OnInit {
     respuestaDetalle: [],
     idSimuladorTipoRespuesta:0
   }
-  public DetalleRespuestaEnvio:RegistroAdsaExamenDetalleDTO={
+  public DetalleRespuestaEnvio:RegistroItilExamenDetalleDTO={
     id:0,
-    idSimuladorAdsaExamen:0,
-    idSimuladorAdsaDominio:0,
-    idSimuladorAdsaTarea:0,
-    idSimuladorAdsaPregunta:0,
+    idSimuladorItilExamen:0,
+    idSimuladorItilDominio:0,
+    idSimuladorItilTarea:0,
+    idSimuladorItilPregunta:0,
     ejecutado:false,
-    idSimuladorAdsaPreguntaRespuesta:0,
+    idSimuladorItilPreguntaRespuesta:0,
     puntaje:0,
     idAspNetUsers:'',
     usuario:''
@@ -96,6 +97,7 @@ export class EntrenamientoPreguntaComponent implements OnInit {
           this.CantidadTotalPreguntas=x.preguntasPendientes+x.preguntasRespondidas;
           this.ContadorPreguntaActual=this.ContadorPregunta+1+x.preguntasRespondidas;
           this.NombreDominio=this.ListaPreguntas[0].dominioNombre;
+          this.NombreTarea=this.ListaPreguntas[0].tareaNombre;
           this.ContadorAux=this.CantidadTotalPreguntas-1;
           this.TiempoSegundo=x.tiempo;
           this.PausarContador=false;
@@ -140,7 +142,7 @@ RegresarMenu(i:number){
 EnviarRespuesta(i:number){
   this.RegistroEnvioRespuesta.respuestaDetalle=[],
     this.RegistroEnvioRespuesta.id=this.IdExamen,
-    this.RegistroEnvioRespuesta.idSimuladorAdsaModo=2,
+    this.RegistroEnvioRespuesta.idSimuladorItilModo=2,
     this.RegistroEnvioRespuesta.nombreExamen='',
     this.RegistroEnvioRespuesta.tiempo=this.TiempoSegundo,
     this.RegistroEnvioRespuesta.idAspNetUsers='',
@@ -158,12 +160,12 @@ EnviarRespuesta(i:number){
           this.RegistroEnvioRespuesta.estadoExamen=3
         }
         this.RegistroEnvioRespuesta.respuestaDetalle.push({
-          idSimuladorAdsaPreguntaRespuesta:x.id,
+          idSimuladorItilPreguntaRespuesta:x.id,
           id:this.ListaPreguntas[i].id,
-          idSimuladorAdsaExamen:0,
-          idSimuladorAdsaDominio:0,
-          idSimuladorAdsaTarea:0,
-          idSimuladorAdsaPregunta:this.ListaPreguntas[i].idSimuladorAdsaPregunta,
+          idSimuladorItilExamen:0,
+          idSimuladorItilDominio:0,
+          idSimuladorItilTarea:0,
+          idSimuladorItilPregunta:this.ListaPreguntas[i].idSimuladorItilPregunta,
           ejecutado:false,
           puntaje:0,
           idAspNetUsers:'',

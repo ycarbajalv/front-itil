@@ -12,6 +12,8 @@ export class AspNetUserService {
   constructor(private http: HttpClient) { }
 
   public Authenticate(Json:UserCredentialsDTO):Observable<any>{
+    console.log('Hola')
+    console.log(Json)
     return this.http.post<any>(this.urlBase+'/Authenticate',Json);
   }
 

@@ -16,7 +16,7 @@ export class EstudioReporteComponent implements OnInit {
   ) { }
   public migaPan = [
     {
-      titulo: 'Simulador ADSA',
+      titulo: 'Simulador ITIL-F',
       urlWeb: '/',
     },
     {
@@ -24,6 +24,7 @@ export class EstudioReporteComponent implements OnInit {
       urlWeb: '/ModoEstudio',
     },
   ];
+  public TareaResultado:any;
   public DominioResultado:any;
   public Examen:any;
   public NombreExamen='';
@@ -48,15 +49,16 @@ export class EstudioReporteComponent implements OnInit {
   ObtenerExamenReporteResultadosPorId(){
     this._ExamenService.ObtenerExamenReporteResultadosPorId(this.IdExamen).subscribe({
       next:(x)=>{
+        console.log(x)
         this.DominioResultado=x.dominioResultado[0];
+        this.TareaResultado=x.dominioResultado[0].tareaResultado[0].nombre;
+        console.log(this.TareaResultado)
         this.Examen=x.examen;
         this.NombreExamen=x.examen.nombreExamen;
         this.TiempoTotalEstudio=x.examen.tiempo;
         this.TiempoPromedio=Math.floor(x.examen.tiempo/x.examen.preguntasRespondidas)
         this.Percentil=Math.floor(x.examen.mayor-x.examen.percentil)
         this.Desempenio=Math.floor(this.DominioResultado.desempenio)
-
-
       },
       complete:()=>{
         this.Minuto = Math.floor((this.TiempoTotalEstudio / 60) % 60);
@@ -66,8 +68,6 @@ export class EstudioReporteComponent implements OnInit {
         this.MinutoPromedioMostrar = (this.MinutoPromedio < 10) ? '0' + this.MinutoPromedio : this.MinutoPromedio.toString();
         this.SegundoPromedio = this.TiempoPromedio % 60;
         this.SegundoPromedioMostrar = (this.SegundoPromedio < 10) ? '0' + this.SegundoPromedio : this.SegundoPromedio.toString();
-
-
 
       }
     })
