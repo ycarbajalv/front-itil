@@ -96,8 +96,8 @@ export class ExamenPreguntaComponent implements OnInit {
           this.NombreDominio=this.ListaPreguntas[0].dominioNombre;
           this.ContadorAux=this.CantidadTotalPreguntas-1;
           this.TiempoSegundo=x.tiempo;
-          //El modo examen dura 180 minutos
-          this.TiempoSegundoReversa=10800-x.tiempo;
+          //El modo examen dura 60 minutos
+          this.TiempoSegundoReversa=3600-x.tiempo;
           this.PausarContador=false;
           this.Cronometro(this.TiempoSegundo);
           this.CronometroReversa(this.TiempoSegundoReversa);
