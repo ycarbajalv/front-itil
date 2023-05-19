@@ -2,6 +2,7 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ExamenIntentoDTO, RegistroItilExamenDTO } from 'src/app/Models/ExamenDTO';
+import { ConfiguracionSimuladorService } from 'src/app/shared/Services/ConfiguracionSimulador/configuracion-simulador.service';
 import { ExamenService } from 'src/app/shared/Services/Examen/examen.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class ModoExamenComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private _ExamenService:ExamenService
+    private _ExamenService:ExamenService,
+    private _ConfiguracionSimulador: ConfiguracionSimuladorService,
   ) { }
   public migaPan = [
     {
@@ -56,6 +58,7 @@ export class ModoExamenComponent implements OnInit {
   public IntentosAprobados=0;
   public PorcentajeIntentosAprobados=0;
   public ExamenIntento:any;
+  PorcentajeMinimoAprobacion = 0;
   public ExamenPorIntento:ExamenIntentoDTO={
     Intento1:0,
     Intento2:0,
@@ -87,12 +90,14 @@ export class ModoExamenComponent implements OnInit {
   public Take=0;
 
 
+
   ngOnInit(): void {
     this.ListaExamenesPorModo();
     this.ListaExamenesIncompletos();
     this.ListaExamenesConcluidos();
     this.ObtenerPromedioIntento();
     this.ObtenerPromedioDominioPorModo();
+    this.ObtenerPorcentaje();
   }
   RegistrarExamen(){
     if(this.userForm.valid){
@@ -271,6 +276,14 @@ export class ModoExamenComponent implements OnInit {
     this._ExamenService.ObtenerPromedioDominioPorModo(3,this.Take).subscribe({
       next:(x)=>{
         this.ResultadosPorDominio=x
+      }
+    })
+  }
+  ObtenerPorcentaje(){
+    this._ConfiguracionSimulador.ObtenerPorcentaje().subscribe({
+      next:(x)=>{
+        this.PorcentajeMinimoAprobacion = x.porcentajeMinimoAprobacion;
+        console.log(this.PorcentajeMinimoAprobacion)
       }
     })
   }

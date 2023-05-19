@@ -50,6 +50,7 @@ export class ModoEstudioComponent implements OnInit {
   public SimulacionesInconclusas=0;
   public CantMEstudio=0;
   public ListaEstudio:any;
+  public ListaLogo: any = []
   public TiempoTotalEstudio=0;
   public Hora=0;
   public Minuto=0;
@@ -72,6 +73,7 @@ export class ModoEstudioComponent implements OnInit {
     this.ListaExamenesConcluidos();
     this.ObtenerPromedioDominioPorModo();
     // this.ObtenerPromedioTareaPorModo();
+    this.ObtenerLogo();
   }
 
   RegistrarExamen(){
@@ -106,13 +108,23 @@ export class ModoEstudioComponent implements OnInit {
         this.Tarea=x;
       }
     })
-
   }
+
+  ObtenerLogo(){
+    this._DominioService.ObtenerLogo().subscribe({
+      next:(x)=>{
+        this.ListaLogo = x;
+        console.log(this.ListaLogo)
+      }
+    })
+  }
+
   ListaExamenesPorModo(){
     this.TiempoTotalEstudio=0;
     this.SimulacionesInconclusas=0;
     this._ExamenService.ResumenSimulacionesPorModo(1).subscribe({
       next:(x)=>{
+        console.log(x)
         this.SimulacionesTotales=x.simulacionesTotales
         this.SimulacionesInconclusas=x.simulacionesInconclusas
         this.TiempoTotalEstudio=x.tiempoPromedio
@@ -122,6 +134,7 @@ export class ModoEstudioComponent implements OnInit {
         this.HoraMostrar = (this.Hora < 10) ? '0' + this.Hora : this.Hora.toString();
         this.Minuto = Math.floor((this.TiempoTotalEstudio / 60) % 60);
         this.MinutoMostrar = (this.Minuto < 10) ? '0' + this.Minuto : this.Minuto.toString();
+        console.log(this.TiempoTotalEstudio)
       }
     });
 
@@ -131,6 +144,7 @@ export class ModoEstudioComponent implements OnInit {
     this._ExamenService.ListaExamenesIncompletos().subscribe({
       next:(x)=>{
         this.SimulacionesIncompletas=x;
+        console.log(x)
         this.SimulacionesIncompletas.forEach((y:any)=>{
           if(y.idEstadoExamen!=3 && y.idSimuladorItilModo==1){
             this.ContSimulacionesIncompletas=x.length;
@@ -143,6 +157,7 @@ export class ModoEstudioComponent implements OnInit {
     this._ExamenService.ListaExamenesConcluidos().subscribe({
       next:(x)=>{
         this.SimulacionesCompletadas=x;
+        console.log(x)
         this.SimulacionesCompletadas.forEach((y:any)=>{
           if(y.idEstadoExamen==3 && y.idSimuladorItilModo==1){
             this.ContSimulacionesCompletadas=x.length;

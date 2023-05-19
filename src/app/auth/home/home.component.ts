@@ -12,6 +12,7 @@ import { ResultadoExamenPorDominioDTO } from 'src/app/Models/DominioDTO';
 import { DominioService } from 'src/app/shared/Services/Dominio/dominio.service';
 import { ResultadoExamenPorTareaDTO } from 'src/app/Models/TareaDTO';
 import { TareaService } from 'src/app/shared/Services/Tarea/tarea.service';
+import { ConfiguracionSimuladorService } from 'src/app/shared/Services/ConfiguracionSimulador/configuracion-simulador.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class HomeComponent implements OnInit {
     private _ExamenService:ExamenService,
     private _DominioService:DominioService,
     private _TareaService:TareaService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private _ConfiguracionService: ConfiguracionSimuladorService
   ) { }
   private signal$ = new Subject();
 
@@ -39,6 +41,8 @@ export class HomeComponent implements OnInit {
   public resise=false;
   public NivelUsuario='';
   public SiguienteNivelUsuario=''
+  public divided=''
+  public listaConfiguracion:any=[]
 
   public urlAvatar='';
   public Avatar: AvatarDTO = {
@@ -114,6 +118,7 @@ export class HomeComponent implements OnInit {
       this.ObtenerPromedioDominioPorModo();
       this.ListaDominioCombo();
       this.ListaTareaCombo();
+      this.ObtenerConfiguracionSimulador()
 
     }
   }
@@ -121,6 +126,7 @@ export class HomeComponent implements OnInit {
   ObtenerAvatar() {
     this._AvatarService.ObtenerAvatar().pipe(takeUntil(this.signal$)).subscribe({
       next: (x) => {
+        console.log(x)
         this.Avatar = x;
         this.NombreAlumno = x.nombres
         this.urlAvatar=this._AvatarService.GetUrlImagenAvatar(this.Avatar);
@@ -141,8 +147,18 @@ export class HomeComponent implements OnInit {
         this.ResultadoTarea6=Math.floor(x.tareaResultado[5].promedio);
         this.ResultadoTarea7=Math.floor(x.tareaResultado[6].promedio);
         this.Examen=x.examen;
+        console.log(this.Examen)
         this.Puntos=Math.floor(x.examen.desempenio)
+        console.log(this.Puntos)
         }
+
+        console.log(this.TareaResultado)
+        this.TareaResultado.forEach((x:any) => {
+          let divided = x.nombreTarea.split(' - ')
+          x.numero=divided[0]
+          x.texto=divided[1]
+          
+        });
       },
       error:(e)=>{
         this.ExamenesCompletados=0
@@ -153,6 +169,7 @@ export class HomeComponent implements OnInit {
   ObtenerNivelUsuario(){
     this._ExamenService.ObtenerNivelUsuario().subscribe({
       next:(x)=>{
+        console.log(x)
         this.NivelUsuario=x.rango.nivel;
         this.SiguienteNivelUsuario=x.rango.siguienteNivel;
         this.PuntosNivel = x.puntosNivel;
@@ -163,16 +180,19 @@ export class HomeComponent implements OnInit {
   ListaExamenesPorModo(){
     this._ExamenService.ResumenSimulacionesPorModo(1).subscribe({
       next:(x)=>{
+        console.log(x)
         this.CantMEstudio=x.simulacionesTotales;
       }
     });
     this._ExamenService.ResumenSimulacionesPorModo(2).subscribe({
       next:(x)=>{
+        console.log(x)
         this.CantMEntrenamiento=x.simulacionesTotales;
       }
     });
     this._ExamenService.ResumenSimulacionesPorModo(3).subscribe({
       next:(x)=>{
+        console.log(x)
         this.CantMExamen=x.simulacionesTotales;
         this.ExamenesActivos=x.simulacionesInconclusas;
         this.ExamenesCompletados=this.CantMExamen-this.ExamenesActivos
@@ -180,6 +200,7 @@ export class HomeComponent implements OnInit {
     });
     this._ExamenService.ListaExamenesPorModoResumen(2).subscribe({
       next:(x)=>{
+        console.log(x)      
         this.ListaEntrenamiento=x
       }
     });
@@ -191,6 +212,7 @@ export class HomeComponent implements OnInit {
           console.log(x)
           this.ResultadosPorTarea=x
         }
+        console.log(this.ResultadosPorTarea)
       }
     })
   }
@@ -209,7 +231,13 @@ export class HomeComponent implements OnInit {
         this.Tarea=x;
       }
     })
-
   }
-
+  ObtenerConfiguracionSimulador(){
+    this._ConfiguracionService.ObtenerConfiguracionSimulador().subscribe({
+      next:(x)=>{
+       this.listaConfiguracion = x
+       console.log(this.listaConfiguracion)
+      }
+    })
+  }
 }

@@ -7,6 +7,7 @@ import { DatoObservableDTO } from 'src/app/Models/DatoObservableDTO';
 import { AvatarService } from '../../Services/Avatar/avatar.service';
 import { HelperService } from '../../Services/helper.service';
 import { SessionStorageService } from '../../Services/session-storage.service';
+import { ConfiguracionSimuladorService } from '../../Services/ConfiguracionSimulador/configuracion-simulador.service';
 
 @Component({
   selector: 'app-header',
@@ -20,16 +21,19 @@ export class HeaderComponent implements OnInit {
     private _router: Router,
     private _SessionStorageService:SessionStorageService,
     private _HelperService:HelperService,
-    private _AvatarService:AvatarService
+    private _AvatarService:AvatarService,
+    private _ConfiguracionService:ConfiguracionSimuladorService
   ) { }
   private signal$ = new Subject();
 
   ngOnDestroy(): void {
     this.signal$.next(true)
     this.signal$.complete()
+    this.ObtenerConfiguracionSimulador();
   }
   public NombreAlumno=''
   public resise=false;
+  public listaConfiguracion:any=[]
   public DatoObservable: DatoObservableDTO ={
     datoAvatar: false,
     datoContenido: false,
@@ -56,6 +60,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if (this.token) {
       this.ObtenerAvatar();
+      this.ObtenerConfiguracionSimulador();
     }
   }
   OpenMenu(){
@@ -80,5 +85,15 @@ export class HeaderComponent implements OnInit {
     this._SessionStorageService.DeleteToken();
     this._HelperService.enviarDatoCuenta(this.DatoObservable);
     this._router.navigate(['Account/login']);
+  }
+  
+  ObtenerConfiguracionSimulador(){
+    console.log("entrar")
+    this._ConfiguracionService.ObtenerConfiguracionSimulador().subscribe({
+      next:(x)=>{
+       this.listaConfiguracion = x
+       console.log(this.listaConfiguracion)
+      }
+    })
   }
 }

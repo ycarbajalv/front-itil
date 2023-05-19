@@ -56,9 +56,9 @@
       Resultado del aprendizaje con mayor rendimiento
     </div>
   </div>
-  <div *ngIf="ResultadosPorTarea!=undefined">
+  <div *ngIf="ResultadosPorDominio!=undefined">
     <div class="row titulo" style="font-weight: 400 !important;margin-bottom: 10px;">
-    <ng-container *ngFor="let itemDominios of ResultadosPorTarea" >
+    <ng-container *ngFor="let itemDominios of ResultadosPorDominio" >
       <div class="col-12 col-md-3">
         <div style="display: flex;justify-content: center;">
           <app-dona-puntos [Puntos]="itemDominios.promedio"></app-dona-puntos>
@@ -99,7 +99,31 @@
                 Seleccione el resultado del aprendizaje que desea estudiar:
               </div>
               <div class="row">
-                <div *ngIf="TareaSeleccionado!=1" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=1">
+                <ng-container *ngFor="let item of ListaLogo">
+                  <div *ngIf="TareaSeleccionado!= item.id" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=item.id">
+                    <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: #0C9AFE ;width:103%" >
+                      <div class="col-md-2" style="display: flex; justify-content: center;">
+                        <img style="height: 50px;" src={{item.imgLogo}}>
+                      </div>
+                      <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;" >
+                        {{item.nombre}}
+                      </div>
+                    </div>
+                  </div>
+                 
+                  <div *ngIf="TareaSeleccionado == item.id " class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=0">
+                    <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: rgb(255, 138, 92) ;width:103%" >
+                      <div class="col-md-2" style="display: flex; justify-content: center;">
+                        <img style="height: 50px;" src={{item.imgLogo}}>
+                      </div>
+                      <div class="col-md-10" style="font-size:15px;color: white;cursor: pointer;display: flex;align-items: center;" >
+                        {{item.nombre}}
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+
+                <!-- <div *ngIf="TareaSeleccionado!=1" class="col-12 col-md-6 CardsDominio" (click)="TareaSeleccionado=1">
                   <div class="card-body row" style="border-radius: 20px 20px 20px 20px; background: #0C9AFE ;width:103%" >
                     <div class="col-md-2" style="display: flex; justify-content: center;">
                       <img style="height: 50px;" src="https://repositorioweb.blob.core.windows.net/repositorioweb/simulador/itil/imagenes/OA1.svg">
@@ -240,10 +264,10 @@
                       Conocer el propósito y términos claves de 18 prácticas de ITIL                   </div>
                   </div>
                 </div>
-              </div>
+              </div>-->
             </div>
-          </div>
-          <mat-error *ngIf="!userForm.invalid && TareaSeleccionado==0">Debe seleccionar una habilidad para la simulación</mat-error>
+          </div> 
+          <mat-error *ngIf="!userForm.invalid && TareaSeleccionado==0">Debe seleccionar un objetivo para la simulación</mat-error>
           <div class="row">
             <div class="col-md-12" style="margin-top: 10px ">
               <div class="subtitulo">Nombre de la simulación:</div>

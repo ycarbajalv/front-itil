@@ -229,7 +229,7 @@
               </mat-progress-bar>
 
 
-              <div class="row" *ngIf="Desempenio>=70" style="padding-top: 30px;padding-bottom: 20px;border-bottom: 1px solid #E4E4E4;">
+              <div class="row" *ngIf="Desempenio>=PorcentajeMinimoAprobacion" style="padding-top: 30px;padding-bottom: 20px;border-bottom: 1px solid #E4E4E4;">
                 <div class="col-md-4 subtitulo">
                   <span>Resultado:</span>
                   <button class="btn btn-block btn-light" style="background: #FAFAFA; border: 1px solid #E4E4E4;margin-left: 12px;" disabled>
@@ -241,7 +241,7 @@
                 </div>
 
               </div>
-              <div class="row" *ngIf="Desempenio<=69" style="padding-top: 30px;padding-bottom: 20px;border-bottom: 1px solid #E4E4E4;">
+              <div class="row" *ngIf="Desempenio<=PorcentajeMinimoAprobacion - 1" style="padding-top: 30px;padding-bottom: 20px;border-bottom: 1px solid #E4E4E4;">
                 <div class="col-md-4 subtitulo">
                   <span>Resultado:</span>
                   <button class="btn btn-block btn-light" style="background: #FAFAFA; border: 1px solid #E4E4E4;margin-left: 12px;" disabled>
@@ -254,13 +254,13 @@
                 </div>
               </div>
               <div class="subtitulo" style="margin-top:15px">
-                Puntaje por habilidad:
+                Puntaje por objetivo de aprendizaje:
               </div>
               <div class="row " style=" align-items: center;margin-top: 30px;">
                 <ng-container *ngFor="let item of EntrenamientoResultado;let i=index">
                   <div style="margin-bottom:25px">
                     <div class="col-12 " style="margin-bottom:5px;font-size: 14px; color: #4a4a49;">
-                      <b>Objetivo de aprendizaje {{i+1}}: </b>
+                      <b>Tarea: </b>
                       <span style="color: #868685;">{{item.nombreTarea}}</span>
                     </div>
                     <div class="row">

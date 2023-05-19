@@ -185,9 +185,9 @@
                 <div class="subtitulo">
                   Leyenda:
                 </div>
-                <ng-container *ngFor="let item of Tarea">
+                <ng-container *ngFor="let divided of TareaResultado">
                   <div class="item-leyenda-barras">
-                    <b>OA:</b> {{item.nombre}}.
+                    <b>OA {{divided.numero}}: </b> {{divided.texto}}.
                   </div>
                 </ng-container>
 
@@ -282,7 +282,7 @@
                     <mat-progress-bar mode="determinate" style="height: 10px;"
                       [value]="itemTareas.promedio">
                     </mat-progress-bar>
-                    <p><b style="color:#786565">Objetivo de aprendizaje{{itemTareas.id}}: </b> <span>{{itemTareas.nombre}}</span></p>
+                    <p><b style="color:#786565">Objetivo de aprendizaje: </b> <span>{{itemTareas.nombre}}</span></p>
                 </div>
                 <div class="col-1">
                     <h5 style="color: #0684f2; white-space: nowrap; font-weight: 800 ">{{itemTareas.promedio}}%</h5>
@@ -290,7 +290,7 @@
                 </div>
               </ng-container>
             </div>
-            <div *ngIf="ResultadosPorDominio==undefined">
+            <div *ngIf="ResultadosPorTarea==undefined">
               <div style=" font-size: 15px;margin-top: 10px;">
                 Aún no ha realizado ninguna sesión de estudio
               </div>
@@ -314,7 +314,9 @@
           </div>
       </div>
   </div>
-    <!-- Instrucciones del simulador -->
+    
+  <!-- Instrucciones del simulador -->
+  <ng-container *ngIf="listaConfiguracion.urlVideo != null && listaConfiguracion.urlVideo != '' && listaConfiguracion.urlVideo != undefined"> 
     <br />
     <div class="card" style="padding:30px;border-radius:20px;">
       <div class="card-body" style="border-radius: 20px 20px 20px 20px; padding-top: 20px; padding-bottom:0px; ">
@@ -324,11 +326,12 @@
         </div>
       <div class="card">
         <video id="videoIntroduccionCrucigrama" class="embed-responsive" controls>
-          
-          <source src="https://repositorioweb.blob.core.windows.net/repositorioweb/aulavirtual/guias/simulador/ITIL-F.mp4" type="video/mp4">
+          <source src={{listaConfiguracion.urlVideo}} type="video/mp4">
         </video>
       </div>
     </div>
   </div>
   <br>
+
+</ng-container>
 </div>
